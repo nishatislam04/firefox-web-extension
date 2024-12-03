@@ -9,28 +9,25 @@
 	}
 	window.hasRun = true;
 
-	/**
-	 * Given a URL to a beast image, remove all existing beasts, then
-	 * create and style an IMG node pointing to
-	 * that image, then insert the node into the document.
-	 */
-	function insertBeast(beastURL) {
-		removeExistingBeasts();
-		const beastImage = document.createElement("img");
-		beastImage.setAttribute("src", beastURL);
-		beastImage.style.height = "100vh";
-		beastImage.className = "beastify-image";
-		document.body.appendChild(beastImage);
-	}
+	function toggleHeader() {
+		const header = document.querySelector(
+			".header_header__zJOD0.header_sticky__2ak2z"
+		);
+		if (!header) return;
 
-	/**
-	 * Remove every beast from the page.
-	 */
-	function removeExistingBeasts() {
-		const existingBeasts = document.querySelectorAll(".beastify-image");
-		for (const beast of existingBeasts) {
-			beast.remove();
-		}
+		header.style.display = header.style.display === "none" ? "block" : "none";
+	}
+	function toggleSidebar() {
+		const sidebar = document.querySelector("main div.relative div.sticky");
+		if (!sidebar) return;
+
+		sidebar.style.display = sidebar.style.display === "none" ? "block" : "none";
+	}
+	function toggleFooter() {
+		const footer = document.querySelector(".jsx-1021054789.footer_root__6F7g2");
+		if (!footer) return;
+
+		footer.style.display = footer.style.display === "none" ? "block" : "none";
 	}
 
 	/**
@@ -38,10 +35,12 @@
 	 * Call "insertBeast()" or "removeExistingBeasts()".
 	 */
 	browser.runtime.onMessage.addListener((message) => {
-		if (message.command === "beastify") {
-			insertBeast(message.beastURL);
-		} else if (message.command === "reset") {
-			removeExistingBeasts();
+		if (message.command === "toggleHeader") {
+			toggleHeader();
+		} else if (message.command === "toggleSidebar") {
+			toggleSidebar();
+		} else if (message.command === "toggleFooter") {
+			toggleFooter();
 		}
 	});
 })();
