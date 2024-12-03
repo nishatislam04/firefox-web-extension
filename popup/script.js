@@ -10,20 +10,22 @@ function listenForClicks() {
 		 * send a "beastify" message to the content script in the active tab.
 		 */
 		function beastify(tabs) {
-			if (e.target.id === "toggleHeader") {
-				browser.tabs.sendMessage(tabs[0].id, {
-					command: "toggleHeader",
-				});
-			}
-			if (e.target.id === "toggleSidebar") {
-				browser.tabs.sendMessage(tabs[0].id, {
-					command: "toggleSidebar",
-				});
-			}
-			if (e.target.id === "toggleFooter") {
-				browser.tabs.sendMessage(tabs[0].id, {
-					command: "toggleFooter",
-				});
+			switch (e.target.id) {
+				case "toggleHeader":
+					browser.tabs.sendMessage(tabs[0].id, {
+						command: "toggleHeader",
+					});
+					break;
+				case "toggleSidebar":
+					browser.tabs.sendMessage(tabs[0].id, {
+						command: "toggleSidebar",
+					});
+					break;
+				case "toggleFooter":
+					browser.tabs.sendMessage(tabs[0].id, {
+						command: "toggleFooter",
+					});
+					break;
 			}
 		}
 

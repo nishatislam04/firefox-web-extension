@@ -35,12 +35,16 @@
 	 * Call "insertBeast()" or "removeExistingBeasts()".
 	 */
 	browser.runtime.onMessage.addListener((message) => {
-		if (message.command === "toggleHeader") {
-			toggleHeader();
-		} else if (message.command === "toggleSidebar") {
-			toggleSidebar();
-		} else if (message.command === "toggleFooter") {
-			toggleFooter();
+		switch (message.command) {
+			case "toggleHeader":
+				toggleHeader();
+				break;
+			case "toggleSidebar":
+				toggleSidebar();
+				break;
+			case "toggleFooter":
+				toggleFooter();
+				break;
 		}
 	});
 })();
