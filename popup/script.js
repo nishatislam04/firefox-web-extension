@@ -1,3 +1,13 @@
+import {
+	calculateState,
+	getAllStates,
+	getLocalItem,
+	onError,
+	onGot,
+	setLocalItem,
+	transmitCommand,
+} from "../helper.js";
+
 /**
  * Listen for clicks on the buttons, and send the appropriate message to
  * the content script in the page.
@@ -10,21 +20,38 @@ function listenForClicks() {
 		 * send a "beastify" message to the content script in the active tab.
 		 */
 		function beastify(tabs) {
+			// getAllStates().then((states) => console.log(states));
+
 			switch (e.target.id) {
 				case "toggleHeader":
-					browser.tabs.sendMessage(tabs[0].id, {
-						command: "toggleHeader",
-					});
+					getLocalItem("header-nextjs")
+						.then(onGot, onError)
+						.then((data) => {
+							const state = calculateState(data["header-nextjs"]);
+							setLocalItem({ "header-nextjs": state });
+						});
+
+					transmitCommand(tabs, "toggleHeader");
 					break;
 				case "toggleSidebar":
-					browser.tabs.sendMessage(tabs[0].id, {
-						command: "toggleSidebar",
-					});
+					getLocalItem("sidebar-nextjs")
+						.then(onGot, onError)
+						.then((data) => {
+							const state = calculateState(data["sidebar-nextjs"]);
+							setLocalItem({ "sidebar-nextjs": state });
+						});
+
+					transmitCommand(tabs, "toggleSidebar");
 					break;
 				case "toggleFooter":
-					browser.tabs.sendMessage(tabs[0].id, {
-						command: "toggleFooter",
-					});
+					getLocalItem("footer-nextjs")
+						.then(onGot, onError)
+						.then((data) => {
+							const state = calculateState(data["footer-nextjs"]);
+							setLocalItem({ "footer-nextjs": state });
+						});
+
+					transmitCommand(tabs, "toggleFooter");
 					break;
 			}
 		}
@@ -40,8 +67,7 @@ function listenForClicks() {
 		 * Get the active tab,
 		 * then call "beastify()" or "reset()" as appropriate.
 		 */
-		if (e.target.tagName !== "BUTTON" || !e.target.closest("#popup-content"))
-			return;
+		if (e.target.tagName !== "BUTTON" || !e.target.closest("#popup-content")) return;
 
 		browser.tabs
 			.query({ active: true, currentWindow: true })
