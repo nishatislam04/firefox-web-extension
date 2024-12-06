@@ -1,12 +1,4 @@
-import {
-	calculateState,
-	getAllStates,
-	getLocalItem,
-	onError,
-	onGot,
-	setLocalItem,
-	transmitCommand,
-} from "../helper.js";
+import { getLocalItem, reset, setLocalItem, transmitCommand } from "../helper.js";
 
 /**
  * Listen for clicks on the buttons, and send the appropriate message to
@@ -14,44 +6,40 @@ import {
  */
 function listenForClicks() {
 	document.addEventListener("click", (e) => {
+		async function toggleItemState(key) {
+			const item = await getLocalItem(key);
+			if (Object.entries(item).length === 0) {
+				await setLocalItem({ key: true });
+			} else {
+				await setLocalItem({
+					key: item[key] === true ? false : true,
+				});
+			}
+		}
 		/**
 		 * Insert the page-hiding CSS into the active tab,
 		 * then get the beast URL and
 		 * send a "beastify" message to the content script in the active tab.
 		 */
-		function beastify(tabs) {
-			// getAllStates().then((states) => console.log(states));
-
+		async function beastify(tabs) {
 			switch (e.target.id) {
 				case "toggleHeader":
-					getLocalItem("header-nextjs")
-						.then(onGot, onError)
-						.then((data) => {
-							const state = calculateState(data["header-nextjs"]);
-							setLocalItem({ "header-nextjs": state });
-						});
+					toggleItemState("header-nextjs");
 
 					transmitCommand(tabs, "toggleHeader");
 					break;
 				case "toggleSidebar":
-					getLocalItem("sidebar-nextjs")
-						.then(onGot, onError)
-						.then((data) => {
-							const state = calculateState(data["sidebar-nextjs"]);
-							setLocalItem({ "sidebar-nextjs": state });
-						});
+					toggleItemState("sidebar-nextjs");
 
 					transmitCommand(tabs, "toggleSidebar");
 					break;
 				case "toggleFooter":
-					getLocalItem("footer-nextjs")
-						.then(onGot, onError)
-						.then((data) => {
-							const state = calculateState(data["footer-nextjs"]);
-							setLocalItem({ "footer-nextjs": state });
-						});
+					toggleItemState("footer-nextjs");
 
 					transmitCommand(tabs, "toggleFooter");
+					break;
+				case "reset":
+					await reset();
 					break;
 			}
 		}

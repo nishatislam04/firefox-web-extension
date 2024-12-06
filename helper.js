@@ -1,31 +1,9 @@
 /**
  *
- * @param {*} item
  * @returns
- * @description
  */
-export function onGot(item) {
-	return item;
-}
-
-/**
- *
- * @param {*} error
- * @returns
- * @description
- */
-export function onError(error) {
-	console.log(`Error: ${error}`);
-	return `Error: ${error}`;
-}
-
-/**
- *
- */
-export function setItem() {
-	browser.storage.local
-		.get(["header-nextjs", "sidebar-nextjs", "footer-nextjs"])
-		.then((data) => {});
+export async function getAllStates() {
+	return await browser.storage.local.get(null);
 }
 
 /**
@@ -34,8 +12,9 @@ export function setItem() {
  * @returns
  * @description
  */
-export function getLocalItem(item) {
-	return browser.storage.local.get(item);
+export async function getLocalItem(item) {
+	const data = await browser.storage.local.get(item);
+	return data;
 }
 
 /**
@@ -43,18 +22,24 @@ export function getLocalItem(item) {
  * @param {*} item
  * @description
  */
-export function setLocalItem(item) {
-	browser.storage.local.set(item).then(setItem, onError);
+export async function setLocalItem(item) {
+	const data = await browser.storage.local.set(item);
+	return data;
 }
 
 /**
  *
- * @param {*} state
- * @returns
- * @description
+ * @param {*} item
  */
-export function calculateState(state) {
-	return state && state === true ? false : true;
+export async function removeLocalItem(item) {
+	await browser.storage.local.remove(item);
+}
+
+/**
+ *
+ */
+export async function reset() {
+	await browser.storage.local.clear();
 }
 
 /**
@@ -67,14 +52,4 @@ export function transmitCommand(tabs, command) {
 	browser.tabs.sendMessage(tabs[0].id, {
 		command,
 	});
-}
-
-export function getAllStates() {
-	const data = browser.storage.local.get([
-		"header-nextjs",
-		"sidebar-nextjs",
-		"footer-nextjs",
-	]);
-
-	return data;
 }

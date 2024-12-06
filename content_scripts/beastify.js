@@ -10,9 +10,7 @@
 	window.hasRun = true;
 
 	function toggleHeader() {
-		const header = document.querySelector(
-			".header_header__zJOD0.header_sticky__2ak2z"
-		);
+		const header = document.querySelector(".header_header__zJOD0.header_sticky__2ak2z");
 		if (!header) return;
 
 		header.style.display = header.style.display === "none" ? "block" : "none";
