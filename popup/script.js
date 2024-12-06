@@ -28,21 +28,22 @@ function listenForClicks() {
 		 * send a "beastify" message to the content script in the active tab.
 		 */
 		async function beastify(tabs) {
+			console.log(await getAllStates());
 			switch (e.target.id) {
 				case "toggleHeader":
 					toggleItemState("header-nextjs");
 
-					transmitCommand(tabs, "toggleHeader");
+					transmitCommand(tabs, { command: "toggleHeader" });
 					break;
 				case "toggleSidebar":
 					toggleItemState("sidebar-nextjs");
 
-					transmitCommand(tabs, "toggleSidebar");
+					transmitCommand(tabs, { command: "toggleSidebar" });
 					break;
 				case "toggleFooter":
 					toggleItemState("footer-nextjs");
 
-					transmitCommand(tabs, "toggleFooter");
+					transmitCommand(tabs, { commnad: "toggleFooter" });
 					break;
 				case "reset":
 					await reset();

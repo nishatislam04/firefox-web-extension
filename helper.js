@@ -49,7 +49,5 @@ export async function reset() {
  * @description
  */
 export function transmitCommand(tabs, command) {
-	browser.tabs.sendMessage(tabs[0].id, {
-		command,
-	});
+	browser.tabs.sendMessage(tabs[0].id, command);
 }
