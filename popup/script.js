@@ -1,4 +1,10 @@
-import { getLocalItem, reset, setLocalItem, transmitCommand } from "../helper.js";
+import {
+	getAllStates,
+	getLocalItem,
+	reset,
+	setLocalItem,
+	transmitCommand,
+} from "../helper.js";
 
 /**
  * Listen for clicks on the buttons, and send the appropriate message to
@@ -9,10 +15,10 @@ function listenForClicks() {
 		async function toggleItemState(key) {
 			const item = await getLocalItem(key);
 			if (Object.entries(item).length === 0) {
-				await setLocalItem({ key: true });
+				await setLocalItem({ [key]: true });
 			} else {
 				await setLocalItem({
-					key: item[key] === true ? false : true,
+					[key]: item[key] === true ? false : true,
 				});
 			}
 		}
