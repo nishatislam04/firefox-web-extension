@@ -32,8 +32,8 @@
 	 * Listen for messages from the background script.
 	 * Call "insertBeast()" or "removeExistingBeasts()".
 	 */
-	browser.runtime.onMessage.addListener((message) => {
-		switch (message.command) {
+	browser.runtime.onMessage.addListener((request) => {
+		switch (request.command) {
 			case "toggleHeader":
 				toggleHeader();
 				break;

@@ -33,7 +33,9 @@ function listenForClicks() {
 				case "toggleHeader":
 					toggleItemState("header-nextjs");
 
-					transmitCommand(tabs, { command: "toggleHeader" });
+					transmitCommand(tabs, {
+						command: "toggleHeader",
+					});
 					break;
 				case "toggleSidebar":
 					toggleItemState("sidebar-nextjs");
