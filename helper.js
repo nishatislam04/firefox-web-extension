@@ -38,8 +38,10 @@ export async function removeLocalItem(item) {
 /**
  *
  */
-export async function reset() {
+export async function reset(items) {
 	await browser.storage.local.clear();
+
+	items.forEach((item) => document.querySelector(`#${item}`).classList.remove("active"));
 }
 
 /**
@@ -48,6 +50,23 @@ export async function reset() {
  * @param {*} command
  * @description
  */
-export function transmitCommand(tabs, command) {
-	browser.tabs.sendMessage(tabs[0].id, command);
+export function transmitCommand(command) {
+	browser.tabs.query({ active: true, currentWindow: true }).then((tabs) => {
+		const id = tabs[0].id;
+
+		browser.tabs.sendMessage(id, command);
+	});
+}
+
+/**
+ *
+ * @param {*} element
+ * @param {*} e
+ */
+export function toggleActiveClass(element, e) {
+	if (element) {
+		e.target.classList.add("active");
+	} else {
+		e.target.classList.remove("active");
+	}
 }
