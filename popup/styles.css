@@ -1,19 +1,60 @@
 html,
 body {
-  width: 300px;
+	width: 300px;
+	margin: 0;
 }
 
 button {
-  border: none;
-  width: 100%;
-  margin: 3% auto;
-  padding: 4px;
-  text-align: center;
-  font-size: 1.5em;
-  cursor: pointer;
-  background-color: #e5f2f2;
+	border: none;
+	width: 100%;
+	padding: 4px 2px;
+	text-align: center;
+	font-size: 1.2em;
+	cursor: pointer;
+	background-color: #e5f2f2;
+	transition: all 300ms;
 }
 
 button:hover {
-  background-color: #cff2f2;
+	background-color: #83ecec;
+}
+
+footer {
+	text-align: right;
+}
+
+footer p {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 14px;
+	font-style: italic;
+	color: #a7a7a7;
+	padding: 0;
+	margin: 0;
+	padding-right: 8px;
+	padding-bottom: 3px;
+}
+
+/* util */
+.active {
+	background-color: #83ecec;
+	color: black;
+	border: 2px solid #a3d1d1;
+	transition: all 300ms;
+}
+
+.active:hover {
+	background-color: #e5f2f2;
+}
+
+#title {
+	text-align: center;
+	font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+	margin: 5px 0 15px 0;
+}
+
+#popup-content {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 10px;
+	padding: 15px 10px;
 }
