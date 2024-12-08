@@ -3,7 +3,7 @@
     "name": "Beastify",
     "version": "1.0",
     "description": "Toggle Nextjs Header, Sidebar, Footer.",
-    "homepage_url": "",
+    "homepage_url": "https://github.com/mdn/webextensions-examples/tree/main/beastify",
     "icons": {
         "16": "icons/icon-16.png"
     },
@@ -18,8 +18,8 @@
     },
     "content_scripts": [
         {
-            "matchers": [
-                "<all_urls>"
+            "matches": [
+                "*://*.nextjs.org/docs/*"
             ],
             "js": [
                 "content_scripts/beastify.js"
