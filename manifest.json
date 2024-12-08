@@ -22,7 +22,7 @@
                 "*://*.nextjs.org/docs/*"
             ],
             "js": [
-                "content_scripts/beastify.js"
+                "content_scripts/content.js"
             ]
         }
     ]
