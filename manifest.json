@@ -19,7 +19,7 @@
     "content_scripts": [
         {
             "matches": [
-                "*://*.nextjs.org/docs/*"
+                "*://*.nextjs.org/*"
             ],
             "js": [
                 "content_scripts/content.js"

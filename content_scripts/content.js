@@ -1,3 +1,5 @@
+import { getLocalItem } from "../helper";
+
 const items = ["header", "sidebar", "footer"];
 const selector = {
 	header: ".header_header__zJOD0.header_sticky__2ak2z",
