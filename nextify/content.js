@@ -1,11 +1,4 @@
-import browser from "webextension-polyfill";
-import { getLocalItem } from "../helper";
-
-// console.log("Hello from the background!");
-
-// browser.runtime.onInstalled.addListener((details) => {
-//   console.log("Extension installed:", details);
-// });
+import { getLocalItem } from "./helper.js";
 
 const items = ["header", "sidebar", "footer"];
 const selector = {
@@ -16,8 +9,7 @@ const selector = {
 
 function toggleVisibility(selector, state) {
 	const element = document.querySelector(selector);
-
-	if (element) element.style.display = !state ? "block" : "none";
+	element.style.setProperty("display", state ? "none" : "block", "important");
 }
 
 browser.runtime.onMessage.addListener((request) => {

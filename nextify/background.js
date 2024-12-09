@@ -1,11 +1,10 @@
 import {
-	getAllStates,
 	getLocalItem,
 	reset,
 	setLocalItem,
 	toggleActiveClass,
 	transmitCommand,
-} from "../helper.js";
+} from "./helper.js";
 
 const items = ["header", "sidebar", "footer"];
 
