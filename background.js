@@ -16,6 +16,11 @@ document.addEventListener("click", async function (e) {
 	if (e.target.id === "reset") await reset();
 	if (!e.target.dataset.page) return;
 
+	if (e.target.id === "apply-all") {
+		const page = e.target.dataset.page;
+		return transmitCommand({ command: page, state: true });
+	}
+
 	const state = {
 		page: e.target.dataset.page,
 		option: e.target.id,

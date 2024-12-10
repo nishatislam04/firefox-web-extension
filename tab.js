@@ -7,7 +7,6 @@ setAttributes(itemName);
 document.addEventListener("click", (e) => {
 	if (e.target.classList.contains("input")) {
 		const input = e.target;
-		const id = input.id;
 		input.setAttribute("data-page", itemName);
 	}
 
@@ -26,6 +25,11 @@ document.addEventListener("click", (e) => {
 			input.checked = false;
 			input.setAttribute("data-page", "");
 		});
+		document.querySelector("#apply-all").setAttribute("data-page", "");
+	}
+
+	if (e.target.id === "apply-all") {
+		e.target.setAttribute("data-page", itemName);
 	}
 });
 document.addEventListener;
