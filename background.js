@@ -1,5 +1,4 @@
 import { getLocalItem, reset, setLocalItem, transmitCommand } from "./helper.js";
-const items = ["header", "sidebar", "footer"];
 
 async function toggleItemState(key) {
 	const item = await getLocalItem(key);
@@ -28,3 +27,7 @@ document.addEventListener("click", async function (e) {
 
 	return;
 });
+
+(async function () {
+	await reset();
+})();
