@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
     <script type="module" src="./background.js"></script>
+    <script type="module" src="./tab.js"></script>
     <title>Popup</title>
   </head>
   <body>
@@ -14,14 +15,32 @@
     </header>
 
     <main id="popup-content">
-      <button id="header">Header</button>
-      <button id="sidebar">Sidebar</button>
-      <button id="footer">Footer</button>
-      <button id="reset">Reset</button>
+      <img src="./icons/laravel.svg" alt="laravel icon" class="icons" id="laravel-icon" height="30px" width="30px" />
+      <img src="./icons/mdn.svg" alt="mdn icon" class="icons" id="mdn-icon" height="30px" width="30px"/>
+      <img src="./icons/tailwind.svg" alt="tailwind-css icon" class="icons" id="tailwind-css-icon" height="30px" width="30px" />
+      <img src="./icons/nextjs.svg" alt="nextjs icon" class="icons" id="nextjs-icon" height="30px" width="30px" />
     </main>
 
-    <footer>
-      <p>made by nishat</p>
-    </footer>
+    <div id="secondary-page" class="hidden">
+    <div class="sticky-bar">
+      <span class="title">Modder</span>
+      <button class="back-btn">Back</button>
+    </div>
+    <div class="options-container">
+      <label>
+        <input type="checkbox" />
+        Header
+      </label>
+      <label>
+        <input type="checkbox" />
+        Sidebar
+      </label>
+      <label>
+        <input type="checkbox" />
+       Footer
+      </label>
+    </div>
+    <button class="apply-btn">Apply All Options</button>
+  </div>
   </body>
 </html>
