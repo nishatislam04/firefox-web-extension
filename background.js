@@ -1,11 +1,4 @@
-import {
-	getLocalItem,
-	reset,
-	setLocalItem,
-	toggleActiveClass,
-	transmitCommand,
-} from "./helper.js";
-
+import { getLocalItem, reset, setLocalItem, transmitCommand } from "./helper.js";
 const items = ["header", "sidebar", "footer"];
 
 async function toggleItemState(key) {
@@ -21,40 +14,17 @@ async function toggleItemState(key) {
 }
 
 document.addEventListener("click", async function (e) {
+	if (e.target.id === "reset") await reset();
+	if (!e.target.dataset.page) return;
+
+	const state = {
+		page: e.target.dataset.page,
+		option: e.target.id,
+	};
+	const item = `${state.page}-${state.option}`;
+	await toggleItemState(item);
+	const toggleState = await getLocalItem(item);
+	transmitCommand({ command: item, state: toggleState[`${item}`] });
+
 	return;
-	if (e.target.id === "header") {
-		const name = "header";
-		await toggleItemState(name);
-		const item = await getLocalItem(name);
-
-		toggleActiveClass(item[name], e);
-		transmitCommand({ command: "header", state: item[name] });
-	}
-
-	if (e.target.id === "sidebar") {
-		const name = "sidebar";
-		await toggleItemState(name);
-		const item = await getLocalItem(name);
-
-		toggleActiveClass(item[name], e);
-		transmitCommand({ command: "sidebar", state: item[name] });
-	}
-
-	if (e.target.id === "footer") {
-		const name = "footer";
-		await toggleItemState(name);
-		const item = await getLocalItem(name);
-
-		toggleActiveClass(item[name], e);
-		transmitCommand({ command: "footer", state: item[name] });
-	}
-
-	if (e.target.id === "reset") {
-		await reset(items);
-	}
 });
-
-// items.forEach(async (item) => {
-// 	const state = await getLocalItem(item);
-// 	if (state[item]) document.querySelector(`#${item}`).classList.add("active");
-// });

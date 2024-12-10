@@ -13,8 +13,8 @@ export async function getAllStates() {
  * @description
  */
 export async function getLocalItem(item) {
-	// const data = await browser.storage.local.get(item);
-	// return data;
+	const data = await browser.storage.local.get(item);
+	return data;
 }
 
 /**
@@ -40,8 +40,6 @@ export async function removeLocalItem(item) {
  */
 export async function reset(items) {
 	await browser.storage.local.clear();
-
-	items.forEach((item) => document.querySelector(`#${item}`).classList.remove("active"));
 }
 
 /**
