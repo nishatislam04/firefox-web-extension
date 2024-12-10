@@ -13,8 +13,8 @@ export async function getAllStates() {
  * @description
  */
 export async function getLocalItem(item) {
-	const data = await browser.storage.local.get(item);
-	return data;
+	// const data = await browser.storage.local.get(item);
+	// return data;
 }
 
 /**

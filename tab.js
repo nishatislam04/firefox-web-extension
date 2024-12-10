@@ -1,20 +1,39 @@
 document.addEventListener("DOMContentLoaded", () => {
-	const icons = document.querySelectorAll(".icons");
+	let itemName = "";
 	const homePage = document.querySelector("#popup-content");
 	const secondaryPage = document.querySelector("#secondary-page");
-	const backButton = document.querySelector(".back-btn");
 
-	icons.forEach((icon) => {
-		icon.addEventListener("click", () => {
-			homePage.style.display = "none"; // Hide the home page
-			secondaryPage.style.display = "block"; // Show the secondary page
-			const secondaryTitle = icon.alt.replace("icon", "").toUpperCase();
-			document.querySelector(".title").textContent = secondaryTitle; // Set the sticky bar title
-		});
-	});
+	setAttributes(itemName);
 
-	backButton.addEventListener("click", () => {
-		secondaryPage.style.display = "none"; // Hide the secondary page
-		homePage.style.display = "grid"; // Show the home page
+	document.addEventListener("click", (e) => {
+		if (e.target.classList.contains("input")) {
+			const input = e.target;
+			const id = input.id;
+			input.setAttribute("data", itemName);
+		}
+
+		if (e.target.classList.contains("icons")) {
+			const icon = e.target;
+			homePage.style.display = "none";
+			secondaryPage.style.display = "block";
+			itemName = icon.alt.replace("icon", "").trim();
+			document.querySelector(".title").textContent = itemName.toUpperCase();
+		}
+
+		if (e.target.id === "back") {
+			secondaryPage.style.display = "none";
+			homePage.style.display = "grid";
+
+			document.querySelectorAll(".input").forEach((input) => {
+				input.checked = false;
+				input.setAttribute("data", "");
+			});
+		}
 	});
 });
+
+function setAttributes(item) {
+	document
+		.querySelectorAll(".input")
+		.forEach((input) => input.setAttribute("data", item));
+}

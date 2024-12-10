@@ -21,6 +21,7 @@ async function toggleItemState(key) {
 }
 
 document.addEventListener("click", async function (e) {
+	return;
 	if (e.target.id === "header") {
 		const name = "header";
 		await toggleItemState(name);
@@ -53,7 +54,7 @@ document.addEventListener("click", async function (e) {
 	}
 });
 
-items.forEach(async (item) => {
-	const state = await getLocalItem(item);
-	if (state[item]) document.querySelector(`#${item}`).classList.add("active");
-});
+// items.forEach(async (item) => {
+// 	const state = await getLocalItem(item);
+// 	if (state[item]) document.querySelector(`#${item}`).classList.add("active");
+// });
