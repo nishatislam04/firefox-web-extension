@@ -1,16 +1,32 @@
-import { getLocalItem, reset, setLocalItem, transmitCommand } from "./helper.js";
+import { elements } from "./elements.js";
+import { getLocalItem, reset, toggleItemState, transmitCommand } from "./helper.js";
 
-async function toggleItemState(key) {
-	const item = await getLocalItem(key);
+function generateElements(data) {
+	const container = document.querySelector(".options-container");
 
-	if (Object.entries(item).length === 0) {
-		await setLocalItem({ [key]: true });
-	} else {
-		await setLocalItem({
-			[key]: item[key] === true ? false : true,
-		});
-	}
+	const page = data.website;
+	const html = data.items
+		.map(
+			(item) => `<label class="input-item" id=${page} data-option=${item
+				.split(" ")
+				.join("")} data-page='${page}'>
+        <input type="checkbox" class="input"  />
+        ${item}
+      </label>`
+		)
+		.join("");
+	document.querySelectorAll(".input-item").forEach((input) => input.remove());
+	container.insertAdjacentHTML("beforebegin", html);
 }
+const webpages = ["nextjs", "laravel", "mdn", "tailwindcss"];
+
+// for generating input options
+document.addEventListener("click", (e) => {
+	const selectedOption = webpages.find((page) => page === e.target.id);
+	if (!selectedOption) return;
+	const data = elements.find((element) => element.website === selectedOption);
+	generateElements(data);
+});
 
 document.addEventListener("click", async function (e) {
 	if (e.target.id === "reset") await reset();
@@ -23,12 +39,14 @@ document.addEventListener("click", async function (e) {
 
 	const state = {
 		page: e.target.dataset.page,
-		option: e.target.id,
+		option: e.target.dataset.option,
 	};
 	const item = `${state.page}-${state.option}`;
+
 	await toggleItemState(item);
 	const toggleState = await getLocalItem(item);
-	transmitCommand({ command: item, state: toggleState[`${item}`] });
+	const itemState = toggleState[`${item}`];
+	transmitCommand({ command: item, state: itemState });
 
 	return;
 });

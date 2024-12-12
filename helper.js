@@ -68,3 +68,15 @@ export function toggleActiveClass(element, e) {
 		e.target.classList.remove("active");
 	}
 }
+
+export async function toggleItemState(key) {
+	const item = await getLocalItem(key);
+
+	if (Object.entries(item).length === 0) {
+		await setLocalItem({ [key]: true });
+	} else {
+		await setLocalItem({
+			[key]: item[key] === true ? false : true,
+		});
+	}
+}

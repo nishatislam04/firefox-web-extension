@@ -4,30 +4,30 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./style.scss" />
     <script type="module" defer src="./tab.js"></script>
     <script type="module" defer src="./background.js"></script>
     <title>Popup</title>
   </head>
   <body>
     <header>
-      <h1 id="reset" class="title">Website Modder</h1>
+      <h1 id="reset" class="title primary-title">Website Modder</h1>
     </header>
 
     <main id="popup-content">
-      <img src="./icons/laravel.svg" alt="laravel icon" class="icons" id="laravel-icon" height="30px" width="30px" />
-      <img src="./icons/mdn.svg" alt="mdn icon" class="icons" id="mdn-icon" height="30px" width="30px"/>
-      <img src="./icons/tailwind.svg" alt="tailwind icon" class="icons" id="tailwind-css-icon" height="30px" width="30px" />
-      <img src="./icons/nextjs.svg" alt="nextjs icon" class="icons" id="nextjs-icon" height="30px" width="30px" />
+      <img src="./icons/laravel.svg" alt="laravel icon" class="icons" id="laravel" height="30px" width="30px" />
+      <img src="./icons/mdn.svg" alt="mdn icon" class="icons" id="mdn" height="30px" width="30px"/>
+      <img src="./icons/tailwind.svg" alt="tailwind icon" class="icons" id="tailwindcss" height="30px" width="30px" />
+      <img src="./icons/nextjs.svg" alt="nextjs icon" class="icons" id="nextjs" height="30px" width="30px" />
     </main>
 
     <div id="secondary-page" class="hidden">
     <div class="sticky-bar">
-      <span class="title">Modder</span>
+      <span class="title secondary-title" >Modder</span>
       <button id="back">Back</button>
     </div>
     <div class="options-container">
-      <label>
+      <!-- <label>
         <input type="checkbox" class="input" id="header" />
         Header
       </label>
@@ -39,7 +39,7 @@
         <input type="checkbox" class="input" id="footer" />
        Footer
       </label>
-    </div>
+    </div> -->
     <button id="apply-all" class="apply-btn">Apply All Options</button>
   </div>
   </body>

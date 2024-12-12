@@ -5,17 +5,12 @@ const secondaryPage = document.querySelector("#secondary-page");
 setAttributes(itemName);
 
 document.addEventListener("click", (e) => {
-	if (e.target.classList.contains("input")) {
-		const input = e.target;
-		input.setAttribute("data-page", itemName);
-	}
-
 	if (e.target.classList.contains("icons")) {
 		const icon = e.target;
 		homePage.style.display = "none";
 		secondaryPage.style.display = "block";
 		itemName = icon.alt.replace("icon", "").trim();
-		document.querySelector(".title").textContent = itemName.toUpperCase();
+		// document.querySelector(".title").textContent = itemName.toUpperCase();
 	}
 
 	if (e.target.id === "back") {
@@ -32,7 +27,6 @@ document.addEventListener("click", (e) => {
 		e.target.setAttribute("data-page", itemName);
 	}
 });
-document.addEventListener;
 
 function setAttributes(item) {
 	document
