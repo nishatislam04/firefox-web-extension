@@ -1,6 +1,6 @@
 export const elements = [
 	{
-		website: "nextjs",
+		webpage: "nextjs",
 		items: ["header", "left sidebar", "right sidebar", "footer", "feedback bottom"],
 		icon: "./icons/nextjs.svg",
 		selectors: [
@@ -16,21 +16,55 @@ export const elements = [
 	},
 
 	{
-		website: "laravel",
+		webpage: "laravel",
 		items: ["header", "left sidebar", "footer"],
 		icon: "./icons/laravel.svg",
-		selector: [{ element: "", select: "" }],
+		selectors: [
+			{
+				element: "header",
+				select:
+					"body div.items-center.justify-center.bg-gradient-to-b.from-red-500.to-red-600.p-2.text-center.text-white.text-sm.h-9",
+			},
+			{ element: "leftsidebar", select: "div#docsScreen div aside" },
+			{ element: "footer", select: "footer" },
+		],
 	},
 	{
-		website: "mdn",
-		items: ["header", "left sidebar", "right sidebar", "bottom feedback", "footer"],
+		webpage: "mdn",
+		items: ["header", "sidebar", "bottom feedback", "footer"],
 		icon: "./icons/mdn.svg",
-		selector: [{ element: "", select: "" }],
+		selectors: [
+			{ element: "header", select: "div#root div div.sticky-header-container" },
+			{
+				element: "sidebar",
+				select: "div.main-wrapper div.sidebar-container",
+			},
+
+			{
+				element: "bottomfeedback",
+				select: "main aside.article-footer",
+			},
+			{
+				element: "footer",
+				select: "footer#nav-footer",
+			},
+		],
 	},
 	{
-		website: "tailwindcss",
+		webpage: "tailwindcss",
 		items: ["header", "left sidebar", "right sidebar", "footer"],
 		icon: "./icons/laravel.svg",
-		selector: [{ element: "", select: "" }],
+		selectors: [
+			{
+				element: "header",
+				select: "div#__next div.sticky.top-0.z-40.w-full",
+			},
+			{
+				element: "leftsidebar",
+				select: "div#__next div div.max-w-8xl.mx-auto.px-4 div.hidden",
+			},
+			{ element: "rightsidebar", select: "div#__next div div div div div.fixed.z-20" },
+			{ element: "footer", select: "footer" },
+		],
 	},
 ];

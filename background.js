@@ -4,13 +4,13 @@ import { getLocalItem, reset, toggleItemState, transmitCommand } from "./helper.
 function generateElements(data) {
 	const container = document.querySelector(".options-container");
 
-	const page = data.website;
+	const page = data.webpage;
 	const html = data.items
 		.map(
-			(item) => `<label class="input-item" id=${page} data-option=${item
+			(item, index) => `<label class="input-item" for=${item}-${index} data-option=${item
 				.split(" ")
 				.join("")} data-page='${page}'>
-        <input type="checkbox" class="input"  />
+        <input id=${item}-${index} type="checkbox" class="input"  />
         ${item}
       </label>`
 		)
@@ -18,14 +18,13 @@ function generateElements(data) {
 	document.querySelectorAll(".input-item").forEach((input) => input.remove());
 	container.insertAdjacentHTML("beforebegin", html);
 }
-const webpages = ["nextjs", "laravel", "mdn", "tailwindcss"];
 
 // for generating input options
 document.addEventListener("click", (e) => {
-	const selectedOption = webpages.find((page) => page === e.target.id);
+	const selectedOption = elements.find((page) => e.target.id === page.webpage);
 	if (!selectedOption) return;
-	const data = elements.find((element) => element.website === selectedOption);
-	generateElements(data);
+
+	generateElements(selectedOption);
 });
 
 document.addEventListener("click", async function (e) {
@@ -34,7 +33,8 @@ document.addEventListener("click", async function (e) {
 
 	if (e.target.id === "apply-all") {
 		const page = e.target.dataset.page;
-		return transmitCommand({ command: page, state: true });
+		transmitCommand({ command: page, state: true });
+		window.close();
 	}
 
 	const state = {

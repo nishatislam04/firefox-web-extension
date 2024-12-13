@@ -9,7 +9,7 @@ document.addEventListener("click", (e) => {
 		const icon = e.target;
 		homePage.style.display = "none";
 		secondaryPage.style.display = "block";
-		itemName = icon.alt.replace("icon", "").trim();
+		itemName = icon.alt.replace("icon", "").trim() + "-apply-all";
 		// document.querySelector(".title").textContent = itemName.toUpperCase();
 	}
 
