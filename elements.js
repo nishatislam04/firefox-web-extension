@@ -30,27 +30,6 @@ export const elements = [
 		],
 	},
 	{
-		webpage: "mdn",
-		items: ["header", "sidebar", "bottom feedback", "footer"],
-		icon: "./icons/mdn.svg",
-		selectors: [
-			{ element: "header", select: "div#root div div.sticky-header-container" },
-			{
-				element: "sidebar",
-				select: "div.main-wrapper div.sidebar-container",
-			},
-
-			{
-				element: "bottomfeedback",
-				select: "main aside.article-footer",
-			},
-			{
-				element: "footer",
-				select: "footer#nav-footer",
-			},
-		],
-	},
-	{
 		webpage: "tailwindcss",
 		items: ["header", "left sidebar", "right sidebar", "footer"],
 		icon: "./icons/laravel.svg",
