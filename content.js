@@ -8,11 +8,8 @@ function applyStyles(selectorElement, state = true) {
 	const items = elements.find((element) => element.webpage === page).selectors;
 
 	if (splitCommand.length > 2) {
-		console.log(items);
 		items.forEach((item) =>
-			document
-				.querySelector(item.select)
-				.style.setProperty("display", "none", "important")
+			document.querySelector(item.select).style.setProperty("display", "none", "important")
 		);
 	}
 
@@ -25,6 +22,5 @@ function applyStyles(selectorElement, state = true) {
 }
 
 browser.runtime.onMessage.addListener((request) => {
-	console.log(request);
 	applyStyles(request.command, request.state);
 });

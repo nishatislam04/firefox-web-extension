@@ -1,23 +1,15 @@
 import { elements } from "./elements.js";
-import { getLocalItem, reset, toggleItemState, transmitCommand } from "./helper.js";
+import {
+	generateElements,
+	getLocalItem,
+	reset,
+	resetState,
+	toggleItemState,
+	transmitCommand,
+} from "./helper.js";
 
-function generateElements(data) {
-	const container = document.querySelector(".options-container");
-
-	const page = data.webpage;
-	const html = data.items
-		.map(
-			(item, index) => `<label class="input-item" for=${item}-${index} data-option=${item
-				.split(" ")
-				.join("")} data-page='${page}'>
-        <input id=${item}-${index} type="checkbox" class="input"  />
-        ${item}
-      </label>`
-		)
-		.join("");
-	document.querySelectorAll(".input-item").forEach((input) => input.remove());
-	container.insertAdjacentHTML("beforebegin", html);
-}
+const homePage = document.querySelector("#popup-content");
+const secondaryPage = document.querySelector("#secondary-page");
 
 // for generating input options
 document.addEventListener("click", (e) => {
@@ -29,13 +21,26 @@ document.addEventListener("click", (e) => {
 
 document.addEventListener("click", async function (e) {
 	if (e.target.id === "reset") await reset();
-	if (!e.target.dataset.page) return;
 
 	if (e.target.id === "apply-all") {
 		const page = e.target.dataset.page;
+		console.log(page);
 		transmitCommand({ command: page, state: true });
 		window.close();
 	}
+
+	if (e.target.classList.contains("icons")) {
+		homePage.style.display = "none";
+		secondaryPage.style.display = "block";
+	}
+
+	if (e.target.id === "back") {
+		secondaryPage.style.display = "none";
+		homePage.style.display = "grid";
+		resetState();
+	}
+
+	if (!e.target.dataset.page) return;
 
 	const state = {
 		page: e.target.dataset.page,
@@ -51,6 +56,4 @@ document.addEventListener("click", async function (e) {
 	return;
 });
 
-(async function () {
-	await reset();
-})();
+(async () => await reset())();

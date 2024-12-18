@@ -80,3 +80,31 @@ export async function toggleItemState(key) {
 		});
 	}
 }
+
+export function resetState() {
+	document.querySelectorAll(".input").forEach((input) => {
+		input.checked = false;
+		input.setAttribute("data-page", "");
+	});
+	document.querySelector("#apply-all").setAttribute("data-page", "");
+}
+
+export function generateElements(data) {
+	const container = document.querySelector(".options-container");
+
+	const page = data.webpage;
+	const html = data.items
+		.map(
+			(item, index) => `<label class="input-item" for=${item}-${index} data-option=${item
+				.split(" ")
+				.join("")} data-page='${page}'>
+        <input id=${item}-${index} type="checkbox" class="input"  />
+        ${item}
+      </label>`
+		)
+		.join("");
+	document.querySelectorAll(".input-item").forEach((input) => input.remove());
+	container.insertAdjacentHTML("beforebegin", html);
+
+	document.querySelector("#apply-all").dataset.page = data.webpage + "-apply-all";
+}
